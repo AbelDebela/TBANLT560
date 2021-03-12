@@ -21,8 +21,6 @@ The purpose of this project is to analyze vaccine distribution data across Unite
 ## Data Dictionary
 ### United States vaccination data
 
-Stored in [`us_state_vaccinations.csv`](us_state_vaccinations.csv). State-by-state data on United States COVID-19 vaccinations. We rely on the data updated daily by the [United States Centers for Disease Control and Prevention](https://covid.cdc.gov/covid-data-tracker/#vaccinations).
-
 * `location`: name of the state or federal entity.
 * `date`: date of the observation.
 * `total_vaccinations`: total number of doses administered. This is counted as a single dose, and may not equal the total number of people vaccinated, depending on the specific dose regime (e.g. people receive multiple doses). If a person receives one dose of the vaccine, this metric goes up by 1. If they receive a second dose, it goes up by 1 again.
