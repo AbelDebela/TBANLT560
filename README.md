@@ -134,12 +134,21 @@ There are plenty of R packages that can help us plot observations & features in 
 <p align="center">
   <img src="https://github.com/AbelDebela/TBANLT560/blob/main/fullyvacinatedbyregion.png"/>
 </p>
+
+We can see that vaccine distribution in southern part of United states relatively going well as compared to the rest of the other regions. 
+
 <p align="center">
   <img src="https://github.com/AbelDebela/TBANLT560/blob/main/medianTotalVaccinationByDayOfWeek.png"/>
 </p>
+
+Vaccines are distributed almost equally throught out the week, however people seem to get more vaccines during Saturday.
+
 <p align="center">
   <img src="https://github.com/AbelDebela/TBANLT560/blob/main/totalVaccineDistributionByDivision.png"/>
 </p>
+
+Looking at the maximum distribution count, west part of of US seems receiving the maximum number of vaccines begining of March 2021.
+
 <p align="center">
   <img src="https://github.com/AbelDebela/TBANLT560/blob/main/averageShareofDosesUsedByState.png"/>
 </p>
