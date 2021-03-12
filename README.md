@@ -131,19 +131,19 @@ write_csv(vaccine_df3, "vaccine_df3.csv")
 
 There are plenty of R packages that can help us plot observations & features in different ways. However, knowing which packages has these plot options is not that quite easy. Also plotting features in R may not give us the interactivity that industry standard visualization platforms provide us. For this reason, I am using Tableau to quickly get some insights out from these datasets. Let’s look median vaccine distribution through weekdays.
 <p align="center">
-  <img src="http://abelabel.com/images/fullyvacinatedbyregion.png"/>
+  <img src="https://github.com/AbelDebela/TBANLT560/blob/main/fullyvacinatedbyregion.png"/>
 </p>
 <p align="center">
-  <img src="http://abelabel.com/images/medianTotalVaccinationByDayOfWeek.png"/>
+  <img src="https://github.com/AbelDebela/TBANLT560/blob/main/medianTotalVaccinationByDayOfWeek.png"/>
 </p>
 <p align="center">
-  <img src="http://abelabel.com/images/totalVaccineDistributionByDivision.png"/>
+  <img src="https://github.com/AbelDebela/TBANLT560/blob/main/totalVaccineDistributionByDivision.png"/>
 </p>
 <p align="center">
-  <img src="http://abelabel.com/images/averageShareofDosesUsedByState.png"/>
+  <img src="https://github.com/AbelDebela/TBANLT560/blob/main/averageShareofDosesUsedByState.png"/>
 </p>
 <p align="center">
-  <img src="http://abelabel.com/images/totalPeopleFullyVaccinatedByState.png"/>
+  <img src="https://github.com/AbelDebela/TBANLT560/blob/main/totalPeopleFullyVaccinatedByState.png"/>
 </p>
 
 
