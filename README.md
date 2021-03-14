@@ -183,8 +183,10 @@ vaccine_df4$location <- NULL
 # method splits dataset ast 75% training and 25 test set.
 set.seed(123)
 vaccine_split <- initial_split(vaccine_df4)
+```
+Out of 51 states, I am assigning 39 states as training data and 12 of them as test sets.
 
-# out of 51 states, I am assigning 39 states as training data and 12 of them as test sets.
+```{r}
 vaccine_train <- training(vaccine_split)
 vaccine_test <- testing(vaccine_split)
 ```
