@@ -190,5 +190,65 @@ Out of 51 states, I am assigning 39 states as training data and 12 of them as te
 vaccine_train <- training(vaccine_split)
 vaccine_test <- testing(vaccine_split)
 ```
+### Linear regression model
+
+```{r, warning=F, message=F}
+lm_spec <- linear_reg() %>%
+    set_engine('lm') %>%
+    set_mode('regression')
+
+lm_fit <- lm_spec %>%
+    fit(fully_vacc ~., data = vaccine_train)
+
+# Evaluating Test 
+vaccine_test_lm_res <- predict(lm_fit, new_data = vaccine_test) %>%
+    rename(lm_pred = .pred)
+
+```
+### Random Forest
+
+```{r, warning=F, message=F}
+
+set.seed(234)
+vacc_rf_spec <- rand_forest(
+    mtry = 2,
+    trees = 10,
+    min_n = 5) %>%
+    set_mode("regression") %>%
+    set_engine("ranger")
+
+
+vacc_rf_fit <- vacc_rf_spec %>%
+    fit(fully_vacc ~., data = vaccine_train)
+
+# Evaluating Test 
+vaccine_test_rf_res <- predict(vacc_rf_fit, new_data = vaccine_test) %>%
+    rename(rf_pred = .pred)
+```
+
+### K Nearest Neighbours
+
+```{r, warning=F, message=F}
+vacc_knn_spec <- nearest_neighbor() %>%
+    set_engine('kknn') %>%
+    set_mode("regression")
+
+vacc_knn_fit <- vacc_knn_spec %>%
+    fit(fully_vacc ~ ., data = vaccine_train) 
+
+# Evaluating Test 
+vaccine_test_knn_res <- predict(vacc_knn_fit, new_data = vaccine_test) %>%
+    rename(knn_pred = .pred)
+```
+### Averaging the three prediction (Linear, Random Forest and Knn) models to create an ensemble prediction.
+
+```{r, warning=F, message=F }
+
+ensembleDF <- bind_cols(vaccine_test$fully_vacc, vaccine_test_lm_res$lm_pred, vaccine_test_rf_res$rf_pred, vaccine_test_knn_res$knn_pred)
+names(ensembleDF) <- c('fully_vacc','lm_pred','rf_pred','knn_pred')
+ensembleDF$model_avg <- (ensembleDF$lm_pred + ensembleDF$rf_pred + ensembleDF$knn_pred) / 3
+
+ensembleDF
+```
 
 
