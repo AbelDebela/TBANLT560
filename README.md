@@ -38,7 +38,7 @@ The purpose of this project is to analyze vaccine distribution data across Unite
 
 
 ## Data Summary
-The US vaccine data has 14 features, and the number of observations grows by 65 every single day. I am explaining. Even though the data set contains all US territories, for the purpose of simplicity, the analysis focuses on the fifty US states including District of Colombia (DC)
+The US vaccine data has 14 features, and the number of observations grows by 65 every day. I am explaining. Even though the data set contains all US territories, for simplicity, the analysis focuses on the fifty US states, including the District of Colombia (DC)
 
 ### Step 1, Select the desired variables (Feature selection)
 ```{r}
@@ -54,7 +54,7 @@ vaccine_df2 <-  vaccineDF %>%
            people_fully_vaccinated)
 ```		   
 
-### Step 2, there is an aggregate location for the united states. Removing those records...
+### Step 2, Since I am considering only US data, I am filtering only states within the United States. 
 ```{r}
 vaccine_df2 <- filter(vaccine_df2, vaccine_df2$location != 'United States')
 ```
@@ -92,13 +92,13 @@ minDate = min(vaccine_df2$date)
 vaccine_df3 <- left_join(vaccine_df2, USStatesByRegion, by = c("location" = "State"))
 ```
 
-### Step 7,  Remove all observation with NA values and review remaining data set.
+### Step 7,  Remove all observations with NA values and review the remaining data set.
 
 ```{r}
 vaccine_df3 <- na.omit(vaccine_df3)
   skim(vaccine_df3)
 ```
-### Now let's examin the data from different visual.
+### Now let's examine the data from different visuals.
 ```{r}
 plot_intro(vaccine_df3) # Needed
 ```
@@ -121,31 +121,31 @@ corrplot(M, method = 'circle', type = 'upper', order = 'hclust')
 
 ```
 
-### After cleaning data, I am writting the cleaned dataset to a csv file. 
+### After cleaning data, I am writing the cleaned dataset to a .csv file. 
 
 ```{r}
 write_csv(vaccine_df3, "vaccine_df3.csv")
 ```
 
-There are plenty of R packages that can help us plot observations & features in different ways. However, knowing which packages has these plot options is not that quite easy. Also plotting features in R may not give us the interactivity that industry standard visualization platforms provide us. For this reason, I am using Tableau to quickly get some insights out from these datasets. Let’s look median vaccine distribution through weekdays.
+There are plenty of R packages that can help us plot observations & features in different ways. However, knowing which packages has these plot options is not that relatively easy. Also, plotting features in R may not give us the interactivity that industry-standard visualization platforms provide us. For this reason, I am using Tableau to get some insights out from these datasets quickly. Let’s look at median vaccine distribution through weekdays.
 
 <p align="center">
   <img src="https://github.com/AbelDebela/TBANLT560/blob/main/fullyvacinatedbyregion.png"/>
 </p>
 
-We can see that vaccine distribution in southern part of United states relatively going well as compared to the rest of the other regions. 
+We can see that vaccine distribution in the southern part of the United States is relatively well compared to the rest of the other regions. 
 
 <p align="center">
   <img src="https://github.com/AbelDebela/TBANLT560/blob/main/medianTotalVaccinationByDayOfWeek.png"/>
 </p>
 
-Vaccines are distributed almost equally throught out the week, however people seem to get more vaccines during Saturday.
+Vaccines are distributed almost equally throughout the week; however, people seem to get more vaccines during Saturday.
 
 <p align="center">
   <img src="https://github.com/AbelDebela/TBANLT560/blob/main/totalVaccineDistributionByDivision.png"/>
 </p>
 
-Looking at the maximum distribution count, west part of of US seems receiving the maximum number of vaccines begining of March 2021.
+Looking at the maximum distribution count, the west part of the US seems to receive the maximum number of vaccines beginning of March 2021.
 
 <p align="center">
   <img src="https://github.com/AbelDebela/TBANLT560/blob/main/averageShareofDosesUsedByState.png"/>
@@ -160,7 +160,7 @@ Looking at the maximum distribution count, west part of of US seems receiving th
 
          
 Now, let me split the dataset as training and test data. I am using 75% training and 25% test data for this case.
-Since my intention is predicting the number of fully vaccinated peoples for the next date, I am assuming the data will be refreshed every single day.
+Since I intend to predict the number of fully vaccinated peoples for the next date, I hope to refresh the data every day.
 
 ```{r, warning=F, message=F }
 
@@ -184,7 +184,7 @@ vaccine_df4$location <- NULL
 set.seed(123)
 vaccine_split <- initial_split(vaccine_df4)
 ```
-Out of 51 states, I am assigning 39 states as training data and 12 of them as test sets.
+Out of 51 states, I assign 39 states as training data and 12 of them as test sets.
 
 ```{r}
 vaccine_train <- training(vaccine_split)
@@ -240,7 +240,7 @@ vacc_knn_fit <- vacc_knn_spec %>%
 vaccine_test_knn_res <- predict(vacc_knn_fit, new_data = vaccine_test) %>%
     rename(knn_pred = .pred)
 ```
-### Averaging the three prediction (Linear, Random Forest and Knn) models to create an ensemble prediction.
+### Below is an averaging forecast of the three prediction models (Linear, Random Forest, and Knn) to create an ensemble prediction.
 
 ```{r, warning=F, message=F }
 
