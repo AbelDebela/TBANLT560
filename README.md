@@ -159,5 +159,34 @@ Looking at the maximum distribution count, west part of of US seems receiving th
     <a href="https://public.tableau.com/profile/abel3532#!/vizhome/USCovid19VaccineDistributionDataAnalysis/USVaccineDistribution?publish=yes&:showVizHome=no">Tableau Dashboard</a>
 
          
+Now, let me split the dataset as training and test data. I am using 75% training and 25% test data for this case.
+Since my intention is predicting the number of fully vaccinated peoples for the next date, I am assuming the data will be refreshed every single day.
+
+```{r, warning=F, message=F }
+
+vaccine_df4 <- vaccine_df3 %>%
+    group_by(location) %>%
+    filter(date == max(date)) %>%
+    select(daily_vaccinations_per_million,
+           distributed_per_hundred,
+           share_doses_used,
+           people_fully_vaccinated,
+           Region,
+           location) %>%
+    rename(vacc_per_mil = daily_vaccinations_per_million,
+           dist_per_hund = distributed_per_hundred,
+           fully_vacc = people_fully_vaccinated)
+
+vaccine_df4$location <- NULL
+
+# Splitting the data as training & test using the rsample package. The default
+# method splits dataset ast 75% training and 25 test set.
+set.seed(123)
+vaccine_split <- initial_split(vaccine_df4)
+
+# out of 51 states, I am assigning 39 states as training data and 12 of them as test sets.
+vaccine_train <- training(vaccine_split)
+vaccine_test <- testing(vaccine_split)
+```
 
 
